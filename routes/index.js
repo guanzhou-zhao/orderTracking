@@ -7,8 +7,8 @@ var User = require('../models/user')
 module.exports = router
 
 router.get('/', ensureLoggedIn(), function (req, res) {
-  // console.log('req', req);
-  res.render('index', {flash: req.flash('error')})
+  console.log('req', req);
+  res.render('index', {name: 'ben'})
 });
 router.get('/login', function (req, res, next) {
   res.render('login', {flash: req.flash('error')})
@@ -39,7 +39,7 @@ router.post('/register',
 
         // req.login() can be used to automatically log the user in after registering
         User.add(req.body.username, req.body.password)
-          .then(function () { return res.redirect('/login')} )
+          .then(function () { return res.redirect('/')} )
           .catch(function (err) {
             console.error(err)
             next()

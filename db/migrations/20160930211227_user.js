@@ -1,6 +1,6 @@
 
 exports.up = function(knex, Promise) {
-  console.log('migrations...')
+  console.log('migrate user...')
   return knex.schema.createTableIfNotExists('user', function (table) {
     table.integer('id').primary()
     table.string('username')
