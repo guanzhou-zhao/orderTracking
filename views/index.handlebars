@@ -1,11 +1,51 @@
-{{name}}
-<p><a href="/classified">Classified Reource</a></p>
+<p><h3>订单管理系统</h3></p>
+{{flash}}
 <img width="200px" height="200px" src="http://pawn.hss.cmu.edu/~67103/images/wombats/wombat4.jpg">
 
+<h4>添加新订单</h4>
+<form action="order" method="POST">
+  <span>店铺名</span><input type="text" name="shopname">
+  <span>关键词</span><input type="text" name="keyword">
+  <span>价格</span><input type="text" name="price">
+  <span>订单号</span><input type="text" name="ordernum">
+  <input type="submit" value="添加">
+</form>
+<table>
+  <tr>
+    <th>店铺名</th>
+    <th>关键词</th>
+    <th>价格</th>
+    <th>订单号</th>
+    <th>录入日期<th>
+    {{#if isAdmin}}
+      <th>录入者</th>
+    {{/if}}
+  </tr>
+  <tr>
+    {{#each orders}}
+      <td>{{this.shopname}}</td>
+      <td>{{this.keyword}}</td>
+      <td>{{this.price}}</td>
+      <td>{{this.ordernum}}</td>
+      <td>{{this.date}}</td>
+      {{#if isAdmin}}
+        <td>{{this.username}}</td>
+      {{/if}}
+    {{/each}}
+  </tr>
+</table>
+ {{#if isAdmin}}
+<h4>添加用户</h4>
 <form action="register" method="POST">
   <span>用户名</span><input name="username">
   <span>密码</span><input name="password">
   <input type="submit" value="添加新用户">
 </form>
-
+<ul class="user_list">
+    <li>用户列表</li>
+  {{#each users}}
+    <li>{{this.username}}</li>
+  {{/each}}
+</ul>
+{{/if}}
 {{> sub-index}}

@@ -10,11 +10,18 @@ function Order () {
 Model.extend(Order)
 Model.knex(knex)
 Order.tableName = 'order'
-
-Order.getByOrdername = function (username) {
+Order.getByUsername = function (username, isAdmin) {
+  return isAdmin ? Order
+    .query()
+    .select() : Order
+      .query()
+      .where({username})
+      .select()
+}
+Order.getByOrderNum = function (ordernum) {
   return Order
-.query()
-    .where('username', username)
+    .query()
+    .where('ordernum', ordernum)
     .select()
 }
 Order.getById = function (id) {
@@ -22,10 +29,9 @@ Order.getById = function (id) {
 .query()
     .where('id', id)
 }
-Order.add = function(username, password) {
-  var hash = bcrypt.hash(password)
+Order.add = function(shopname, keyword, price, ordernum, username) {
   return Order
-.query()
-    .insert({username, hash})
+    .query()
+    .insert({shopname, keyword, price, ordernum, username})
 }
 module.exports = Order

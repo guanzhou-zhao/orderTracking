@@ -10,7 +10,9 @@ function User () {
 Model.extend(User)
 Model.knex(knex)
 User.tableName = 'user'
-
+User.getAllUsers = function () {
+  return User.query().orderBy('date', 'desc')
+}
 User.getByUsername = function (username) {
   return User.query()
     .where('username', username)
@@ -44,10 +46,13 @@ User.serializeUser = function(user, done) {
 }
 User.deserializeUser = function(user, done) {
   console.log('deserialize user......');
-  User.getById(user.id)
-    .then(function (users) {
-      var duser = _.first(users)
-      done(null, duser)
-    })
+  try {
+    User.getById(user.id)
+      .then(function (users) {
+        var duser = _.isEmpty(users) ? null : _.first(users)
+        done(null, duser)
+      })
+  } catch(e) {
+  }
 }
 module.exports = User
