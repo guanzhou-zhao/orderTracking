@@ -35,3 +35,6 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Sqlite db file
+db/dev.sqlite3
