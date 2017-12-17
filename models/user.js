@@ -11,7 +11,7 @@ Model.extend(User)
 Model.knex(knex)
 User.tableName = 'user'
 User.getAllUsers = function () {
-  return User.query().orderBy('date', 'desc')
+  return User.query()
 }
 User.getByUsername = function (username) {
   return User.query()
@@ -28,16 +28,20 @@ User.add = function(username, password) {
     .insert({username, hash})
 }
 User.verifyUser = function(username, password, done) {
-  console.log('verifyUser in LocalStrategy......');
+  console.log(`verifyUser in LocalStrategy...... username: ${username} password: ${password} `);
     User.getByUsername(username)
     .then(function(users) {
       var user = _.first(users)
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
-      } else if (!bcrypt.compareHash(password, user.hash)) {
-        return done(null, false, { message: 'Incorrect password.' });
+      } else {
+        console.log(`user: ${JSON.stringify(user)}`)
+        if (!bcrypt.compareHash(password, user.hash)) {
+          return done(null, false, { message: 'Incorrect password.' });
+        } else {
+          return done(null, user);
+        }
       }
-      return done(null, user);
     })
 }
 User.serializeUser = function(user, done) {

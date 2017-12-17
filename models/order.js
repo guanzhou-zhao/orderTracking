@@ -9,7 +9,7 @@ function Order () {
 
 Model.extend(Order)
 Model.knex(knex)
-Order.tableName = 'order'
+Order.tableName = 'orderi'
 Order.getByUsername = function (username, isAdmin) {
   return isAdmin ? Order
     .query()

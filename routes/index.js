@@ -16,6 +16,7 @@ router.get('/', ensureLoggedIn(), function (req, res) {
   }
   Order.getByUsername(req.user.username, isAdmin).then((orders) => {
     data.orders = orders;
+    console.log(`get /: data.orders: ${JSON.stringify(data.orders)}`)
     if (!isAdmin) {
       res.render('index', data)
     } else {
@@ -42,7 +43,7 @@ router.get('/logout', function (req, res, next) {
 router.get('/register', function (req, res) {
   res.render('register', { flash: req.flash('error') })
 })
-router.post('/register', ensureLoggedIn(), 
+router.post('/register', ensureLoggedIn(),
   function (req, res, next) {
     User.getByUsername(req.body.username)
       .then(function (users) {
@@ -71,7 +72,7 @@ router.post('/register', ensureLoggedIn(),
     res.redirect('/register')
   }
 )
-router.post('/order',
+router.post('/order', ensureLoggedIn(),
   function (req, res, next) {
     var newOrder = req.body
     Order.getByOrderNum(newOrder.ordernum)
@@ -84,6 +85,7 @@ router.post('/order',
         }
 
         // req.login() can be used to automatically log the user in after registering
+        console.log(`add new order: user: ${JSON.stringify(req.user)}`)
         Order.add(newOrder.shopname.trim(), newOrder.keyword.trim(), newOrder.price.trim(), newOrder.ordernum.trim(), req.user.username)
           .then(function () { return res.redirect('/')} )
           .catch(function (err) {

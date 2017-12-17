@@ -34,18 +34,23 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'mysql',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host: process.env.DB_HOST,
+      database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS
     },
     pool: {
       min: 2,
-      max: 10
+      max: 5
     },
     migrations: {
+      directory: './db/migrations',
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './db/seeds' // relative path from the tests/ folder!
     }
   }
 
