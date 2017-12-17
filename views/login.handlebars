@@ -1,7 +1,32 @@
-<p>{{ flash }}</p>
-<form action="/login" method="POST">
-  <span>用户名</span><input name="username">
-  <span>密码</span><input type="password" name="password">
-  <input type="submit" value="登录">
-</form>
-<!-- <p>No account? Register <a href="/register">here</a>.</p> -->
+{{error}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-4 col-md-4  col-sm-offset-1 col-sm-10 col-sm-offset-1">
+      <div class="panel panel-default" style="margin-top: 40px;">
+        <div class="panel-heading">
+          <h3 class="panel-title">账号密码登录</h3>
+        </div>
+        <div class="panel-body">
+          <!-- <p>No account? Register <a href="/register">here</a>.</p> -->
+          <form  action="/login" method="POST" class="form-horizontal">
+            <div class="form-group">
+              <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                <input type="text" name="username" class="form-control" id="inputEmail3" placeholder="用户名">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                <button type="submit" class="btn btn-default">登录</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
