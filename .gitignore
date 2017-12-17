@@ -38,3 +38,6 @@ jspm_packages
 
 # Sqlite db file
 db/dev.sqlite3
+
+# dotenv configuration file
+.env
