@@ -12,7 +12,8 @@ router.get('/', ensureLoggedIn(), function (req, res) {
   var isAdmin = req.user.username == 'rosfiled'
   var data = {
     error: req.flash('error'),
-    isAdmin
+    isAdmin,
+    user: req.user
   }
   Order.getByUsername(req.user.username, isAdmin).then((orders) => {
     data.orders = orders;
