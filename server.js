@@ -3,5 +3,5 @@ var app = require('./app')
 var port = process.env.PORT || 3000
 
 app.listen(port, function () {
-  console.log('listening on: ', port)
+  console.log(`listening on: ${port} NODE_ENV: ${process.env.NODE_ENV}`)
 })
