@@ -13,6 +13,7 @@ var User = require('./models/user')
 var index = require('./routes')
 var app = express();
 
+app.use(express.static('public'))
 app.use( bodyParser.urlencoded({ extended: true }) );
 // Create `ExpressHandlebars` instance with a default layout.
 var hbs = exphbs.create({

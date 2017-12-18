@@ -1,52 +1,77 @@
 {{> navbar}}
-<p><h3>订单管理系统</h3></p>
-{{flash}}
-<img width="200px" height="200px" src="http://pawn.hss.cmu.edu/~67103/images/wombats/wombat4.jpg">
+<div class="container" >
+  {{flash}}
 
-<h4>添加新订单</h4>
-<form action="order" method="POST">
-  <span>店铺名</span><input type="text" name="shopname">
-  <span>关键词</span><input type="text" name="keyword">
-  <span>价格</span><input type="number" name="price" min="0" value="0" step="any">
-  <span>订单号</span><input type="text" name="ordernum">
-  <input type="submit" value="添加">
-</form>
-<table>
-  <tr>
-    <th>店铺名</th>
-    <th>关键词</th>
-    <th>价格</th>
-    <th>订单号</th>
-    <th>录入日期<th>
-    {{#if isAdmin}}
-      <th>录入者</th>
-    {{/if}}
-  </tr>
-    {{#each orders}}
+  <ul class="nav nav-tabs nav-justified mt-4">
+    <li role="presentation" class="active"><a href="#">添加订单</a></li>
+    <li role="presentation"><a href="#">搜索订单</a></li>
+  </ul>
+  <form  action="order" method="POST" class="form-inline mt-4">
+    <div class="form-group">
+      <label for="shopname">店铺名</label>
+      <input name="shopname" type="text" class="form-control" id="shopname">
+    </div>
+    <div class="form-group">
+      <label for="keyword">关键词</label>
+      <input type="text" name="keyword" class="form-control" id="keyword">
+    </div>
+    <div class="form-group">
+      <label for="price">价格</label>
+      <input type="number" name="price" id="price" min="0" value="0" step="any">
+    </div>
+    <div class="form-group">
+      <label for="ordernum">订单号</label>
+      <input type="text" name="ordernum" class="form-control" id="ordernum">
+    </div>
+    <button type="submit" class="btn btn-default">添加</button>
+  </form>
+  <table class="table table-hover mt-4">
     <tr>
-      <td>{{shopname}}</td>
-      <td>{{this.keyword}}</td>
-      <td>{{this.price}}</td>
-      <td>{{this.ordernum}}</td>
-      <td>{{this.created_at}}</td>
-      {{#if ../isAdmin}}
-        <td>{{this.username}}</td>
+      <th>店铺名</th>
+      <th>关键词</th>
+      <th>价格</th>
+      <th>订单号</th>
+      <th>录入日期</th>
+      {{#if isAdmin}}
+        <th>录入者</th>
       {{/if}}
     </tr>
-    {{/each}}
-</table>
+      {{#each orders}}
+      <tr>
+        <td>{{shopname}}</td>
+        <td>{{this.keyword}}</td>
+        <td>{{this.price}}</td>
+        <td>{{this.ordernum}}</td>
+        <td>{{this.created_at}}</td>
+        {{#if ../isAdmin}}
+          <td>{{this.username}}</td>
+        {{/if}}
+      </tr>
+      {{/each}}
+  </table>
+
  {{#if isAdmin}}
-<h4>添加用户</h4>
-<form action="register" method="POST">
-  <span>用户名</span><input name="username">
-  <span>密码</span><input name="password">
-  <input type="submit" value="添加新用户">
-</form>
-<ul class="user_list">
-    <li>用户列表</li>
-  {{#each users}}
-    <li>{{this.username}}</li>
-  {{/each}}
-</ul>
-{{/if}}
-{{> sub-index}}
+   <ul class="nav nav-tabs nav-justified mt-4">
+     <li role="presentation" class="active"><a href="#">添加用户</a></li>
+     <li role="presentation"><a href="#">搜索用户</a></li>
+   </ul>
+   <form  action="register" method="POST" class="form-inline mt-4">
+     <div class="form-group">
+       <label for="username">用户名</label>
+       <input name="username" type="text" class="form-control" id="username">
+     </div>
+     <div class="form-group">
+       <label for="password">密码</label>
+       <input type="text" name="password" class="form-control" id="password">
+     </div>
+     <button type="submit" class="btn btn-default">添加新用户</button>
+   </form>
+    <ul class="list-group mt-4">
+        <li class="list-group-item disabled">用户列表</li>
+      {{#each users}}
+        <li class="list-group-item">{{this.username}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+  {{> sub-index}}
+</div>
