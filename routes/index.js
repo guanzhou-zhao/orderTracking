@@ -5,6 +5,7 @@ var log = require('debug')('routes:index:log')
 var _ = require('lodash')
 var User = require('../models/user')
 var Order = require('../models/order')
+var moment = require('moment');
 module.exports = router
 
 router.get('/', ensureLoggedIn(), function (req, res) {
@@ -23,7 +24,14 @@ router.get('/order', ensureLoggedIn(), function (req, res) {
     isOrder: true
   }
   Order.getByUsername(req.user.username, isAdmin).then((orders) => {
-    data.orders = orders;
+    var ordersDate = orders.map(order => {
+      return moment(order.created_at).format('YYYY')
+    })
+    console.log(`order dates: ${JSON.stringify(ordersDate)}`)
+    data.orders = orders.map(order => {
+      order.created_at = moment(order.created_at).format('YYYY-MM-D HH:mm:ss')
+      return order
+    });
     res.render('order', data)
   })
 });
