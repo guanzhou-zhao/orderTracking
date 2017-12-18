@@ -11,7 +11,7 @@ router.get('/', ensureLoggedIn(), function (req, res) {
   res.redirect('/order')
 });
 router.get('/task', ensureLoggedIn(), function (req, res) {
-  res.render('task')
+  res.render('task', {user: req.user, isTask: true})
 });
 router.get('/order', ensureLoggedIn(), function (req, res) {
   console.log('req.query: ', req.query)
@@ -19,7 +19,8 @@ router.get('/order', ensureLoggedIn(), function (req, res) {
   var data = {
     error: req.flash('error'),
     isAdmin,
-    user: req.user
+    user: req.user,
+    isOrder: true
   }
   Order.getByUsername(req.user.username, isAdmin).then((orders) => {
     data.orders = orders;
@@ -32,7 +33,8 @@ router.get('/user', ensureLoggedIn(), function (req, res) {
   var data = {
     error: req.flash('error'),
     isAdmin,
-    user: req.user
+    user: req.user,
+    isUser: true
   }
   User.getAllUsers().then((users) => {
     data.users = users;

@@ -12,11 +12,11 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="navbar-pages">
       <ul class="nav navbar-nav">
-        <li><a href="/task">任务列表</a></li>
-        <li class="active"><a href="/order">订单列表</a></li>
-        <li><a href="/user">用户管理</a></li>
+        <li class="{{#if isTask}}active{{/if}}"><a href="/task">任务列表</a></li>
+        <li class="{{#if isOrder}}active{{/if}}"><a href="/order">订单列表</a></li>
+        <li class="{{#if isUser}}active{{/if}}"><a href="/user">用户管理</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
