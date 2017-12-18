@@ -8,7 +8,13 @@ var Order = require('../models/order')
 module.exports = router
 
 router.get('/', ensureLoggedIn(), function (req, res) {
-  // console.log('req', req)
+  res.redirect('/order')
+});
+router.get('/task', ensureLoggedIn(), function (req, res) {
+  res.render('task')
+});
+router.get('/order', ensureLoggedIn(), function (req, res) {
+  console.log('req.query: ', req.query)
   var isAdmin = req.user.username == 'rosfiled'
   var data = {
     error: req.flash('error'),
@@ -17,15 +23,20 @@ router.get('/', ensureLoggedIn(), function (req, res) {
   }
   Order.getByUsername(req.user.username, isAdmin).then((orders) => {
     data.orders = orders;
-    console.log(`get /: data.orders: ${JSON.stringify(data.orders)}`)
-    if (!isAdmin) {
-      res.render('index', data)
-    } else {
-      User.getAllUsers().then((users) => {
-        data.users = users;
-        res.render('index', data)
-      })
-    }
+    res.render('order', data)
+  })
+});
+router.get('/user', ensureLoggedIn(), function (req, res) {
+  console.log('req.query: ', req.query)
+  var isAdmin = req.user.username == 'rosfiled'
+  var data = {
+    error: req.flash('error'),
+    isAdmin,
+    user: req.user
+  }
+  User.getAllUsers().then((users) => {
+    data.users = users;
+    res.render('user', data)
   })
 });
 router.get('/login', function (req, res, next) {
