@@ -5,6 +5,7 @@ var log = require('debug')('routes:index:log')
 var _ = require('lodash')
 var User = require('../models/user')
 var Order = require('../models/order')
+var taskRouter = require('./task')
 var moment = require('moment');
 module.exports = router
 
@@ -29,9 +30,8 @@ router.use(ensureLoggedIn())
 router.get('/', function (req, res) {
   res.redirect('/order')
 });
-router.get('/task', function (req, res) {
-  res.render('task', {user: req.user, isTask: true})
-});
+router.use('/task', taskRouter)
+
 router.get('/order', function (req, res) {
   console.log('req.query: ', req.query)
   var isAdmin = req.user.username == 'rosfiled'
