@@ -8,13 +8,31 @@ var Order = require('../models/order')
 var moment = require('moment');
 module.exports = router
 
-router.get('/', ensureLoggedIn(), function (req, res) {
+router.get('/login', function (req, res, next) {
+  res.render('login', {flash: req.flash('error')})
+})
+router.post('/login',
+  passport.authenticate('local', {
+      successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true })
+);
+router.get('/logout', function (req, res, next) {
+  req.logout()
+  res.redirect('/login')
+})
+router.get('/register', function (req, res) {
+  res.render('register', { flash: req.flash('error') })
+})
+
+router.use(ensureLoggedIn())
+router.get('/', function (req, res) {
   res.redirect('/order')
 });
-router.get('/task', ensureLoggedIn(), function (req, res) {
+router.get('/task', function (req, res) {
   res.render('task', {user: req.user, isTask: true})
 });
-router.get('/order', ensureLoggedIn(), function (req, res) {
+router.get('/order', function (req, res) {
   console.log('req.query: ', req.query)
   var isAdmin = req.user.username == 'rosfiled'
   var data = {
@@ -35,7 +53,7 @@ router.get('/order', ensureLoggedIn(), function (req, res) {
     res.render('order', data)
   })
 });
-router.get('/user', ensureLoggedIn(), function (req, res) {
+router.get('/user', function (req, res) {
   console.log('req.query: ', req.query)
   var isAdmin = req.user.username == 'rosfiled'
   var data = {
@@ -49,22 +67,6 @@ router.get('/user', ensureLoggedIn(), function (req, res) {
     res.render('user', data)
   })
 });
-router.get('/login', function (req, res, next) {
-  res.render('login', {flash: req.flash('error')})
-})
-router.post('/login',
-  passport.authenticate('local', {
-      successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true })
-);
-router.get('/logout', function (req, res, next) {
-  req.logout()
-  res.redirect('/login')
-})
-router.get('/register', function (req, res) {
-  res.render('register', { flash: req.flash('error') })
-})
 router.post('/register', ensureLoggedIn(),
   function (req, res, next) {
     User.getByUsername(req.body.username)
