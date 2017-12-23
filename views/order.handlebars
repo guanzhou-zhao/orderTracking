@@ -35,6 +35,7 @@
       {{#if isAdmin}}
         <th>录入者</th>
       {{/if}}
+      <th>操作</th>
     </tr>
       {{#each orders}}
       <tr>
@@ -46,6 +47,10 @@
         {{#if ../isAdmin}}
           <td>{{this.username}}</td>
         {{/if}}
+        <td>
+          <a href="#" class="edit_order" c-data={{}}>编辑</a>
+          <a href="#" class="delete_order" c-data="{{id}}">删除</a>
+        </td>
       </tr>
       {{/each}}
   </table>

@@ -13,12 +13,34 @@
       <label for="password">密码</label>
       <input type="text" name="password" class="form-control" required id="password">
     </div>
+    <div class="form-group">
+      <label for="displayname">显示名</label>
+      <input name="displayname" type="text" class="form-control" required id="displayname">
+    </div>
+    <div class="form-group">
+      <label for="contact">微信号</label>
+      <input name="contact" type="text" class="form-control" required id="contact">
+    </div>
+    <div class="form-group">
+      <label for="comment">备注</label>
+      <input name="comment" type="text" class="form-control" required id="comment">
+    </div>
     <button type="submit" class="btn btn-default">添加新用户</button>
   </form>
-   <ul class="list-group mt-4">
-       <li class="list-group-item disabled">用户列表</li>
-     {{#each users}}
-       <li class="list-group-item">{{this.username}}</li>
-     {{/each}}
-   </ul>
+  <table class="table table-hover mt-4">
+    <tr>
+      <th>登录用户名</th>
+      <th>显示用户名</th>
+      <th>微信号</th>
+      <th>备注</th>
+    </tr>
+      {{#each users}}
+      <tr>
+        <td>{{username}}</td>
+        <td>{{displayname}}</td>
+        <td>{{contact}}</td>
+        <td>{{comment}}</td>
+      </tr>
+      {{/each}}
+  </table>
 </div>

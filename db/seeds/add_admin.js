@@ -7,7 +7,13 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       return Promise.all([
         // Inserts seed entries
-        knex('user').insert({username: 'rosfiled', hash: bcrypt.hash('s39_p123K')})
+        knex('user').insert({
+            username: 'rosfiled',
+            displayname: '赵冠雅',
+            contact: 'zgy586',
+            comment: '手机号：18898798123；地址：洛阳',
+            hash: bcrypt.hash('s39_p123K')
+          })
       ]);
     });
 };

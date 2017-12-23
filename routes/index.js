@@ -25,6 +25,7 @@ router.get('/logout', function (req, res, next) {
 router.use(ensureLoggedIn())
 
 router.get('/', function (req, res) {
+  console.log('===_ index route / req.user: ', req.user)
   res.redirect('/order')
 });
 router.use('/task', taskRouter)
