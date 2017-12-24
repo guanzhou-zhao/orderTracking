@@ -8,8 +8,14 @@ $(document).ready(function(){
       showPopupPanelAndOverlay($edit_link.attr('c-target'), $edit_link.attr('c-data'), event)
     })
     $('#order_edit_form_cancel').click(function(event) {
-
       hidePopupPanelAndOverlay($(this).attr('c-target'), event)
+    })
+    $('.order_delete_link').click(function(event) {
+      var url = `/order/delete/${$(this).attr('c-data')}`
+      $.get(url, function(data, status) {
+        console.log(`data, status == ${data}, ${status}`)
+        location.reload()
+      })
     })
 });
 

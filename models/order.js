@@ -36,6 +36,11 @@ Order.patchById = function(order) {
     .query()
     .patchAndFetchById(id, order)
 }
+Order.delById = function (id) {
+  return Order
+    .query()
+    .deleteById(id)
+}
 Order.add = function(shopname, keyword, price, ordernum, username) {
   return Order
     .query()

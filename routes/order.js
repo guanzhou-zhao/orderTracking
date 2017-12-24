@@ -25,11 +25,19 @@ router.get('/', function (req, res) {
   })
 });
 router.post('/edit', function(req, res) {
-  // console.log(`===route order.post /edit :: ${JSON.stringify(req.body)}`)
   Order
     .patchById(req.body)
     .then(function(updatedOrder) {
       res.redirect('/order')
+    })
+})
+router.get('/delete/:id', function(req, res) {
+  console.log(`===route order.get /delete :: ${JSON.stringify(req.params)}`)
+  Order
+    .delById(req.params.id)
+    .then(function(numberOfDeletedRows) {
+
+      res.send({numberOfDeletedRows})
     })
 })
 router.post('/',
