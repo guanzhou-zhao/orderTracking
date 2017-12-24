@@ -61,7 +61,7 @@
       <h2 class="facebox-header pb-0 border-bottom-0 mb-1" data-facebox-id="facebox-header" tabindex="-1" id="facebox-header">
         修改订单信息
       </h2>
-      <form  action="order" method="POST" class="form-horizontal mt-4">
+      <form  action="order/edit" method="POST" class="form-horizontal mt-4">
         <input type="hidden" name="id" value="0">
         <div class="form-group">
           <label for="shopname" class="col-sm-2">店铺名</label>
@@ -89,7 +89,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">添加</button>
+            <button type="submit" class="btn btn-default">确认修改</button>
             <button id="order_edit_form_cancel" c-target="#order_edit_form" type="button" class="btn btn-default">取消</button>
           </div>
         </div>

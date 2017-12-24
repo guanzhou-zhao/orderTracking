@@ -6,7 +6,7 @@ var _ = require('lodash')
 module.exports = router
 
 router.get('/', function (req, res) {
-  console.log('req.query: ', req.query)
+  // console.log('===route order.get / req.query: ', req.query)
   var isAdmin = req.user.username == 'rosfiled'
   var data = {
     error: req.flash('error'),
@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
     isOrder: true
   }
   Order.getByUsername(req.user.username, isAdmin).then((orders) => {
-    
+
     data.orders = orders.map(order => {
       order.created_at = moment(order.created_at).format('YYYY-MM-D HH:mm:ss')
       order.order_json_string = JSON.stringify(order)
@@ -24,7 +24,14 @@ router.get('/', function (req, res) {
     res.render('order', data)
   })
 });
-
+router.post('/edit', function(req, res) {
+  // console.log(`===route order.post /edit :: ${JSON.stringify(req.body)}`)
+  Order
+    .patchById(req.body)
+    .then(function(updatedOrder) {
+      res.redirect('/order')
+    })
+})
 router.post('/',
   function (req, res, next) {
     var newOrder = req.body

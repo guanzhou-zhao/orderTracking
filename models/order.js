@@ -29,6 +29,13 @@ Order.getById = function (id) {
 .query()
     .where('id', id)
 }
+Order.patchById = function(order) {
+  var id = order.id;
+  delete order.id;
+  return Order
+    .query()
+    .patchAndFetchById(id, order)
+}
 Order.add = function(shopname, keyword, price, ordernum, username) {
   return Order
     .query()
