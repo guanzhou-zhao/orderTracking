@@ -11,11 +11,17 @@ $(document).ready(function(){
       hidePopupPanelAndOverlay($(this).attr('c-target'), event)
     })
     $('.order_delete_link').click(function(event) {
-      var url = `/order/delete/${$(this).attr('c-data')}`
-      $.get(url, function(data, status) {
-        console.log(`data, status == ${data}, ${status}`)
-        location.reload()
-      })
+      var order = JSON.parse($(this).attr('c-data'))
+      var url = `/order/delete/${order.id}`
+
+      var confirmText = `您确定删除在${order.created_at}为“${order.shopname}”创建的订单（订单号为：${order.ordernum}）吗？`
+      var r = confirm(confirmText);
+      if (r) {
+        $.get(url, function(data, status) {
+          console.log(`data, status == ${data}, ${status}`)
+          location.reload()
+        })
+      }
     })
 });
 
