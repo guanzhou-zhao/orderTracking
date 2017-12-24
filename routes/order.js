@@ -15,12 +15,10 @@ router.get('/', function (req, res) {
     isOrder: true
   }
   Order.getByUsername(req.user.username, isAdmin).then((orders) => {
-    var ordersDate = orders.map(order => {
-      return moment(order.created_at).format('YYYY')
-    })
-    console.log(`order dates: ${JSON.stringify(ordersDate)}`)
+    
     data.orders = orders.map(order => {
       order.created_at = moment(order.created_at).format('YYYY-MM-D HH:mm:ss')
+      order.order_json_string = JSON.stringify(order)
       return order
     });
     res.render('order', data)

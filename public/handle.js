@@ -3,21 +3,33 @@ $(document).ready(function(){
         showOverlay()
         showChangePassPanel()
     });
-    $('#order_edit_link').click(function(event) {
+    $('.order_edit_link').click(function(event) {
       var $edit_link = $(this)
+      showPopupPanelAndOverlay($edit_link.attr('c-target'), $edit_link.attr('c-data'), event)
+    })
+    $('#order_edit_form_cancel').click(function(event) {
 
-      showPopupPanelAndOverLay($edit_link.attr('c-target'), $edit_link.attr('c-data'), event)
+      hidePopupPanelAndOverlay($(this).attr('c-target'), event)
     })
 });
 
-function showPopupPanelAndOverLay(panelID, data, event) {
+function showPopupPanelAndOverlay(panelID, data, event) {
   event.preventDefault()
   $(panelID).show()
+  var order = JSON.parse(data)
+  $(panelID).find('input').each(function() {
+    $(this).val(order[$(this).attr('name')])
+  })
   var bodyWidthPx = $('body').css('width')
   var panelWidthPx = $(panelID).css('width')
   var toLeft = bodyWidthPx.slice(0, bodyWidthPx.length-2)/2 - panelWidthPx.slice(0, panelWidthPx.length-2)/2
   $(panelID).css('left', `${toLeft}px`)
   showOverlay()
+}
+function hidePopupPanelAndOverlay(panelID, event) {
+    event.preventDefault()
+    $(panelID).hide()
+    hideOverlay()
 }
 
 function showOverlay() {
