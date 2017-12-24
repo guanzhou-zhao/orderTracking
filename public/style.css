@@ -24,3 +24,38 @@
 #change_pass_panel {
   z-index: 100;
 }
+/* facebox */
+.facebox {
+    position: absolute;
+    top: 68px;
+    z-index: 100;
+    padding-bottom: 40px;
+}
+.facebox-popup {
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(27,31,35,0.25);
+    border-radius: 5px;
+    box-shadow: 0 0 18px rgba(27,31,35,0.4);
+}
+.facebox-content {
+    width: 455px;
+    padding: 15px;
+}
+.facebox-content::before {
+    display: table;
+    content: "";
+}
+.facebox-content::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+.facebox-header {
+    padding: 15px;
+    margin: -15px -15px 15px;
+    font-size: 18px;
+    font-weight: normal;
+    border-bottom: 1px solid #e1e4e8;
+}

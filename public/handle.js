@@ -1,9 +1,24 @@
 $(document).ready(function(){
-    $("#change_pass_link").click(function(){
+    $('#change_pass_link').click(function(){
         showOverlay()
         showChangePassPanel()
     });
+    $('#order_edit_link').click(function(event) {
+      var $edit_link = $(this)
+
+      showPopupPanelAndOverLay($edit_link.attr('c-target'), $edit_link.attr('c-data'), event)
+    })
 });
+
+function showPopupPanelAndOverLay(panelID, data, event) {
+  event.preventDefault()
+  $(panelID).show()
+  var bodyWidthPx = $('body').css('width')
+  var panelWidthPx = $(panelID).css('width')
+  var toLeft = bodyWidthPx.slice(0, bodyWidthPx.length-2)/2 - panelWidthPx.slice(0, panelWidthPx.length-2)/2
+  $(panelID).css('left', `${toLeft}px`)
+  showOverlay()
+}
 
 function showOverlay() {
   document.getElementById("overlay").style.display = "block";

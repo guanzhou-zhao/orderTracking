@@ -48,10 +48,51 @@
           <td>{{this.username}}</td>
         {{/if}}
         <td>
-          <a href="#" class="edit_order" c-data={{}}>编辑</a>
-          <a href="#" class="delete_order" c-data="{{id}}">删除</a>
+          <a href="#" id="order_edit_link" c-data="{{order_json_string}}" c-target="#order_edit_form">编辑</a>
+          <a href="#" id="order_delete_link" c-data="{{id}}">删除</a>
         </td>
       </tr>
       {{/each}}
   </table>
 </div>
+<div class="facebox" id="order_edit_form" style="display: none">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+      <h2 class="facebox-header pb-0 border-bottom-0 mb-1" data-facebox-id="facebox-header" tabindex="-1" id="facebox-header">
+        修改订单信息 
+      </h2>
+      <form  action="order" method="POST" class="form-horizontal mt-4">
+        <div class="form-group">
+          <label for="shopname" class="col-sm-2">店铺名</label>
+          <div class="col-sm-10">
+            <input name="shopname" type="text" class="form-control" id="shopname">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="keyword" class="col-sm-2">关键词</label>
+          <div class="col-sm-10">
+            <input type="text" name="keyword" class="form-control" id="keyword">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="price" class="col-sm-2">价格</label>
+          <div class="col-sm-10">
+            <input type="number" name="price" id="price" min="0" value="0" step="any">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ordernum" class="col-sm-2">订单号</label>
+          <div class="col-sm-10">
+            <input type="text" name="ordernum" class="form-control" id="ordernum">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">添加</button>
+            <button type="button" class="btn btn-default">取消</button>
+          </div>
+        </div>
+      </form>
+    </div> <!-- facebox-content -->
+  </div> <!-- facebox-popup -->
+</div> <!-- facebox -->
