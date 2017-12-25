@@ -46,7 +46,7 @@ $(document).ready(function(){
       var order = JSON.parse($(this).attr('c-data'))
       var url = `/order/delete/${order.id}`
 
-      var confirmText = `您确定删除在${order.created_at}为“${order.shopname}”创建的订单（订单号为：${order.ordernum}）吗？`
+      var confirmText = `您确定删除在${order.created_at}为店铺“${order.shopname}”创建的订单（订单号为：${order.ordernum}）吗？`
       var r = confirm(confirmText);
       if (r) {
         $.get(url, function(data, status) {
@@ -62,6 +62,9 @@ function showPopupPanelAndOverlay(panelID, data, event) {
   $(panelID).show()
   var order = JSON.parse(data)
   $(panelID).find('input').each(function() {
+    $(this).val(order[$(this).attr('name')])
+  })
+  $(panelID).find('select').each(function() {
     $(this).val(order[$(this).attr('name')])
   })
   var bodyWidthPx = $('body').css('width')

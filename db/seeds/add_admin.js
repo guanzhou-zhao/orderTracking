@@ -9,6 +9,7 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries
         knex('user').insert({
             username: 'rosfiled',
+            role: 100,
             displayname: '赵冠雅',
             contact: 'zgy586',
             comment: '手机号：18898798123；地址：洛阳',

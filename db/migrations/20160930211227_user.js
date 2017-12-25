@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.charset('utf8')
     table.increments('id').primary()
     table.string('username')
+    table.integer('role').notNullable()
     table.string('displayname')
     table.string('contact')
     table.string('comment')

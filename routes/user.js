@@ -15,8 +15,30 @@ router.get('/', function (req, res) {
   User.getAllUsers().then((users) => {
     data.users = users.map(function(u) {
       u.user_json_string = JSON.stringify(u)
+      var roleName = ''
+      var className = ''
+      switch (u.role) {
+        case 1:
+          roleName = '买手';
+          className = 'success';
+          break;
+        case 10:
+          roleName = '金主';
+          className = 'warning';
+          break;
+        case 100:
+          roleName = '管理员';
+          className = 'danger';
+          break;
+        default:
+          roleName = '末知';
+          break;
+      }
+      u.roleName = roleName
+      u.className = className
       return u;
     });
+    // console.log(`===route user.post /resetpass :: ${JSON.stringify(req.body)}`)
     res.render('user', data)
   })
 });
