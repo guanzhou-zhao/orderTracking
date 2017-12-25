@@ -14,10 +14,6 @@
       <input type="text" name="password" class="form-control" required id="password">
     </div>
     <div class="form-group">
-      <label for="displayname">显示名</label>
-      <input name="displayname" type="text" class="form-control" required id="displayname">
-    </div>
-    <div class="form-group">
       <label for="contact">微信号</label>
       <input name="contact" type="text" class="form-control" required id="contact">
     </div>
@@ -30,14 +26,12 @@
   <table class="table table-hover mt-4">
     <tr>
       <th>登录用户名</th>
-      <th>显示用户名</th>
       <th>微信号</th>
       <th>备注</th>
     </tr>
       {{#each users}}
       <tr>
         <td>{{username}}</td>
-        <td>{{displayname}}</td>
         <td>{{contact}}</td>
         <td>{{comment}}</td>
       </tr>
