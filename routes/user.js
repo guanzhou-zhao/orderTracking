@@ -13,7 +13,10 @@ router.get('/', function (req, res) {
     isUser: true
   }
   User.getAllUsers().then((users) => {
-    data.users = users;
+    data.users = users.map(function(u) {
+      u.user_json_string = JSON.stringify(u)
+      return u;
+    });
     res.render('user', data)
   })
 });

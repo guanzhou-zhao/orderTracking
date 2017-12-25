@@ -28,13 +28,55 @@
       <th>登录用户名</th>
       <th>微信号</th>
       <th>备注</th>
+      <th>操作</th>
     </tr>
       {{#each users}}
       <tr>
         <td>{{username}}</td>
         <td>{{contact}}</td>
         <td>{{comment}}</td>
+        <td>
+          <a href="#" class="user_edit_link" c-data="{{user_json_string}}" c-target="#user_edit_form">编辑</a>
+          <a href="#" class="user_delete_link" c-data="{{user_json_string}}">删除</a>
+          <a href="#" class="user_reset_pass_link" c-data="{{user_json_string}}">重置密码</a>
+        </td>
       </tr>
       {{/each}}
   </table>
 </div>
+<div class="facebox" id="user_edit_form" style="display: none">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+      <h2 class="facebox-header pb-0 border-bottom-0 mb-1" data-facebox-id="facebox-header" tabindex="-1" id="facebox-header">
+        修改用户信息
+      </h2>
+      <form  action="user/edit" method="POST" class="form-horizontal mt-4">
+        <input type="hidden" name="id" value="0">
+        <div class="form-group">
+          <label for="username" class="col-sm-2">用户名</label>
+          <div class="col-sm-10">
+            <input name="username" type="text" class="form-control" id="username">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contact" class="col-sm-2">微信号</label>
+          <div class="col-sm-10">
+            <input type="text" name="contact" class="form-control" id="contact">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="comment" class="col-sm-2">备注</label>
+          <div class="col-sm-10">
+            <input type="text" name="comment" class="form-control" id="comment">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">确认修改</button>
+            <button id="user_edit_form_cancel" c-target="#user_edit_form" type="button" class="btn btn-default">取消</button>
+          </div>
+        </div>
+      </form>
+    </div> <!-- facebox-content -->
+  </div> <!-- facebox-popup -->
+</div> <!-- facebox -->

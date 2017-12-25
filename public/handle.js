@@ -3,6 +3,14 @@ $(document).ready(function(){
         showOverlay()
         showChangePassPanel()
     });
+    $('.user_edit_link').click(function(event) {
+      var $edit_link = $(this)
+      showPopupPanelAndOverlay($edit_link.attr('c-target'), $edit_link.attr('c-data'), event)
+    })
+    $('#user_edit_form_cancel').click(function(event) {
+      hidePopupPanelAndOverlay($(this).attr('c-target'), event)
+    })
+        
     $('.order_edit_link').click(function(event) {
       var $edit_link = $(this)
       showPopupPanelAndOverlay($edit_link.attr('c-target'), $edit_link.attr('c-data'), event)
