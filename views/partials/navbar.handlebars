@@ -16,7 +16,9 @@
       <ul class="nav navbar-nav">
         <li class="{{#if isTask}}active{{/if}}"><a href="/task">任务列表</a></li>
         <li class="{{#if isOrder}}active{{/if}}"><a href="/order">订单列表</a></li>
-        <li class="{{#if isUser}}active{{/if}}"><a href="/user">用户管理</a></li>
+        {{#if isAdmin}}
+          <li class="{{#if isUser}}active{{/if}}"><a href="/user">用户管理</a></li>
+        {{/if}}
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
