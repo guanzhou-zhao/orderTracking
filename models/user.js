@@ -22,6 +22,11 @@ User.getById = function (id) {
   return User.query()
     .where('id', id)
 }
+User.delById = function (id) {
+  return User
+    .query()
+    .deleteById(id)
+}
 User.patchById = function(user) {
   var id = user.id;
   delete user.id;

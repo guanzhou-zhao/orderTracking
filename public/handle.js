@@ -10,7 +10,20 @@ $(document).ready(function(){
     $('#user_edit_form_cancel').click(function(event) {
       hidePopupPanelAndOverlay($(this).attr('c-target'), event)
     })
-        
+    $('.user_delete_link').click(function(event) {
+      var user = JSON.parse($(this).attr('c-data'))
+      var url = `/user/delete/${user.id}`
+
+      var confirmText = `您确定删除用户“${user.username}”吗？`
+      var r = confirm(confirmText);
+      if (r) {
+        $.get(url, function(data, status) {
+          console.log(`data, status == ${data}, ${status}`)
+          location.reload()
+        })
+      }
+    })
+
     $('.order_edit_link').click(function(event) {
       var $edit_link = $(this)
       showPopupPanelAndOverlay($edit_link.attr('c-target'), $edit_link.attr('c-data'), event)

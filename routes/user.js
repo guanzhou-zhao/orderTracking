@@ -20,6 +20,15 @@ router.get('/', function (req, res) {
     res.render('user', data)
   })
 });
+router.get('/delete/:id', function (req, res) {
+  console.log(`===route user.get /delete :: ${JSON.stringify(req.params)}`)
+  User
+    .delById(req.params.id)
+    .then(function(numberOfDeletedRows) {
+
+      res.send({numberOfDeletedRows})
+    })
+})
 router.post('/edit', function(req, res) {
   User
     .patchById(req.body)
