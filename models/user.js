@@ -41,6 +41,11 @@ User.add = function(newuser) {
   return User.query()
     .insert(newuser)
 }
+User.patchPassByAdmin = function(id, new_pass) {
+  return User
+    .query()
+    .patchAndFetchById(id, {hash: bcrypt.hash(new_pass)})
+}
 User.patchPass = function(id, old_pass, new_pass) {
   console.log(`===_ model user patchPass, id:old_pass:new_pass  ${id}:${old_pass}:${new_pass} ${bcrypt.hash(old_pass)}`)
   return User
@@ -58,10 +63,6 @@ User.patchPass = function(id, old_pass, new_pass) {
         })
       }
     })
-  return User
-    .query()
-    .patch({hash: bcrypt.hash(new_pass)})
-    .where({id, hash: bcrypt.hash(old_pass)})
 }
 User.verifyUser = function(username, password, done) {
   console.log(`verifyUser in LocalStrategy...... username: ${username} password: ${password} `);

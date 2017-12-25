@@ -21,7 +21,6 @@ router.get('/', function (req, res) {
   })
 });
 router.get('/delete/:id', function (req, res) {
-  console.log(`===route user.get /delete :: ${JSON.stringify(req.params)}`)
   User
     .delById(req.params.id)
     .then(function(numberOfDeletedRows) {
@@ -34,6 +33,14 @@ router.post('/edit', function(req, res) {
     .patchById(req.body)
     .then(function(updatedUser) {
       res.redirect('/user')
+    })
+})
+router.post('/resetpass', function(req, res) {
+  console.log(`===route user.post /resetpass :: ${JSON.stringify(req.body)}`)
+  User
+    .patchPassByAdmin(req.body.id, req.body.newpass)
+    .then(function(updatedUser) {
+      res.send(updatedUser)
     })
 })
 router.post('/',

@@ -23,6 +23,17 @@ $(document).ready(function(){
         })
       }
     })
+    $('.user_reset_pass_link').click(function(event) {
+      var user = JSON.parse($(this).attr('c-data'))
+      var url = `/user/resetpass`
+
+      var r = prompt(`您正在为用户“${user.username}”修改密码，请输入新密码：`);
+      if (r) {
+        $.post(url, {id: user.id, newpass: r.trim()},function(data, status) {
+          console.log(`data, status == ${data}, ${status}`)
+        })
+      }
+    })
 
     $('.order_edit_link').click(function(event) {
       var $edit_link = $(this)

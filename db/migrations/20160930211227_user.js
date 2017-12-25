@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
     table.string('displayname')
     table.string('contact')
     table.string('comment')
-    table.string('hash')
+    table.string('hash').notNullable()
     table.timestamps(true, true)
   })
 };
