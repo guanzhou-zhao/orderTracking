@@ -22,6 +22,13 @@ User.getById = function (id) {
   return User.query()
     .where('id', id)
 }
+User.patchById = function(user) {
+  var id = user.id;
+  delete user.id;
+  return User
+    .query()
+    .patchAndFetchById(id, user)
+}
 User.add = function(newuser) {
   newuser.hash = bcrypt.hash(newuser.password)
   delete newuser.password

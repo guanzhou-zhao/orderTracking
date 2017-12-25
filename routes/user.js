@@ -20,6 +20,13 @@ router.get('/', function (req, res) {
     res.render('user', data)
   })
 });
+router.post('/edit', function(req, res) {
+  User
+    .patchById(req.body)
+    .then(function(updatedUser) {
+      res.redirect('/user')
+    })
+})
 router.post('/',
   function (req, res, next) {
     User.getByUsername(req.body.username)
