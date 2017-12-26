@@ -47,8 +47,8 @@
         <td>{{comment}}</td>
         <td>
           <a href="#" class="user_edit_link" c-data="{{user_json_string}}" c-target="#user_edit_form">编辑</a>
-          <a tabindex="0" role="button" class="_user_delete_link" c-data="{{user_json_string}}"  data-toggle="popover"  data-trigger="focus" data-placement="bottom" title="请确认">删除</a>
-          <a href="#" class="user_reset_pass_link" c-data="{{user_json_string}}">重置密码</a>
+          <a tabindex="0" role="button" c-url="/user/delete/{{id}}" c-data="{{user_json_string}}" c-for="delete" data-trigger="focus"  data-toggle="popover"  data-placement="bottom" title="请确认">删除</a>
+          <a tabindex="0" role="button" class="_user_reset_pass_link" c-id="{{id}}" c-user="{{username}}" c-for="resetpass" data-toggle="popover"  data-placement="top">重置密码</a>
         </td>
       </tr>
       {{/each}}

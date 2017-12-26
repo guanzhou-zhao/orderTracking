@@ -62,7 +62,7 @@ router.post('/resetpass', function(req, res) {
   User
     .patchPassByAdmin(req.body.id, req.body.newpass)
     .then(function(updatedUser) {
-      res.send(updatedUser)
+      res.redirect('/user')
     })
 })
 router.post('/',

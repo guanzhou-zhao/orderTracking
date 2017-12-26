@@ -1,10 +1,20 @@
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover({
+    $('[data-toggle="popover"][c-for="delete"]').popover({
       'delay': { "show": 50, "hide": 100 },
       'html': true,
       'content': function() {
-        var user = JSON.parse($(this).attr('c-data'))
-        return `<button type="button" class="btn btn-danger" onclick="deleteUser(${user.id})">删除</button>`
+        var url = $(this).attr('c-url')
+        return `<button type="button" class="btn btn-danger" onclick="deleteObj('${url}')">删除</button>`
+      }
+    })
+    $('[data-toggle="popover"][c-for="resetpass"]').popover({
+      'delay': { "show": 50, "hide": 100 },
+      'html': true,
+      'content': function() {
+        var id = $(this).attr('c-id')
+        var username = $(this).attr('c-user')
+
+        return `<form action="/user/resetpass" method="POST" class="form-horizontal"><input type="hidden" id="${id}"><div style="margin-bottom: 8px"><input type="text" class="form-control" name="newpass" placeholder="请输入新密码"></div><button type="submit" class="btn btn-success">重置“${username}”的密码</button></form>`
       }
     })
     $('#change_pass_link').click(function(){
@@ -51,9 +61,7 @@ $(document).ready(function(){
       }
     })
 });
-function deleteUser(id) {
-  var url = `/user/delete/${id}`
-
+function deleteObj(url) {
   $.get(url, function(data, status) {
     console.log(`data, status == ${data}, ${status}`)
     location.reload()
