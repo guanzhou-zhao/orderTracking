@@ -1,4 +1,12 @@
 $(document).ready(function(){
+    $('[data-toggle="popover"]').popover({
+      'delay': { "show": 50, "hide": 100 },
+      'html': true,
+      'content': function() {
+        var user = JSON.parse($(this).attr('c-data'))
+        return `<button type="button" class="btn btn-danger" onclick="deleteUser(${user.id})">删除</button>`
+      }
+    })
     $('#change_pass_link').click(function(){
         showOverlay()
         showChangePassPanel()
@@ -9,19 +17,6 @@ $(document).ready(function(){
     })
     $('#user_edit_form_cancel').click(function(event) {
       hidePopupPanelAndOverlay($(this).attr('c-target'), event)
-    })
-    $('.user_delete_link').click(function(event) {
-      var user = JSON.parse($(this).attr('c-data'))
-      var url = `/user/delete/${user.id}`
-
-      var confirmText = `您确定删除用户“${user.username}”吗？`
-      var r = confirm(confirmText);
-      if (r) {
-        $.get(url, function(data, status) {
-          console.log(`data, status == ${data}, ${status}`)
-          location.reload()
-        })
-      }
     })
     $('.user_reset_pass_link').click(function(event) {
       var user = JSON.parse($(this).attr('c-data'))
@@ -56,7 +51,14 @@ $(document).ready(function(){
       }
     })
 });
+function deleteUser(id) {
+  var url = `/user/delete/${id}`
 
+  $.get(url, function(data, status) {
+    console.log(`data, status == ${data}, ${status}`)
+    location.reload()
+  })
+}
 function showPopupPanelAndOverlay(panelID, data, event) {
   event.preventDefault()
   $(panelID).show()

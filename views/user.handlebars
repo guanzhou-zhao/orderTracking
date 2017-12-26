@@ -29,7 +29,7 @@
       <label for="comment">备注</label>
       <input name="comment" type="text" class="form-control" required id="comment">
     </div>
-    <button type="submit" class="btn btn-default">添加新用户</button>
+    <button type="submit" class="btn btn-success">添加新用户</button>
   </form>
   <table class="table table-hover mt-4">
     <tr>
@@ -47,7 +47,7 @@
         <td>{{comment}}</td>
         <td>
           <a href="#" class="user_edit_link" c-data="{{user_json_string}}" c-target="#user_edit_form">编辑</a>
-          <a href="#" class="user_delete_link" c-data="{{user_json_string}}">删除</a>
+          <a tabindex="0" role="button" class="_user_delete_link" c-data="{{user_json_string}}"  data-toggle="popover"  data-trigger="focus" data-placement="bottom" title="请确认">删除</a>
           <a href="#" class="user_reset_pass_link" c-data="{{user_json_string}}">重置密码</a>
         </td>
       </tr>
@@ -92,7 +92,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">确认修改</button>
+            <button type="submit" class="btn btn-success">确认修改</button>
             <button id="user_edit_form_cancel" c-target="#user_edit_form" type="button" class="btn btn-default">取消</button>
           </div>
         </div>
